@@ -73,7 +73,7 @@ const QRForm = () => {
     e.preventDefault();
 
     try {
-        const response = await axios.post('http://localhost:5000/api/qrdata', formData);
+        const response = await axios.post('https://final-b-red.vercel.app/api/qrdata', formData);
 
         if (response.status === 201) {
             const { userId, qrdata } = response.data;
@@ -250,7 +250,7 @@ const QRForm = () => {
               <h2>{namedata.name}</h2>
               <QRCodeCanvas
                 id="qr-code-canvas"
-                value={`http://localhost:3000/user/${userId}`}
+                value={`https://final-f-kohl.vercel.app/user/${userId}`}
                 size={300}
                 fgColor="#000000"
                 bgColor="#ffffff"
