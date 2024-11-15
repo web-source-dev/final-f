@@ -13,7 +13,7 @@ const ViewData = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('https://final-qr-update-b.vercel.app/api/users');
+        const response = await axios.get('https://final-b-red.vercel.app/api/users');
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -24,7 +24,7 @@ const ViewData = () => {
 
   const handleCheckboxChange = async (userId, isChecked) => {
     try {
-      await axios.put(`https://final-qr-update-b.vercel.app/api/users/${userId}`, { isAllowed: isChecked });
+      await axios.put(`https://final-b-red.vercel.app/api/users/${userId}`, { isAllowed: isChecked });
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user._id === userId ? { ...user, isAllowed: isChecked } : user
@@ -87,7 +87,7 @@ const ViewData = () => {
     const confirmDelete = window.confirm('Are you sure you want to delete this user?');
     if (confirmDelete) {
       try {
-        await axios.delete(`https://final-qr-update-b.vercel.app/api/users/${userId}`);
+        await axios.delete(`https://final-b-red.vercel.app/api/users/${userId}`);
         setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
       } catch (error) {
         console.error('Error deleting user:', error);
@@ -211,7 +211,7 @@ const ViewData = () => {
                   <div className="qr-code-all">
                     <QRCodeCanvas
                       id={`qr-code-canvas-${user._id}`}
-                      value={`http://localhost:3000/user/${user._id}`}
+                      value={`https://final-f-kohl.vercel.app/user/${user._id}`}
                       size={70}
                       onClick={() => handleQRCodeClick(`qr-code-canvas-${user._id}`)} // Open QR in popup
                     />
