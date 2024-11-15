@@ -33,7 +33,7 @@ const EditQRForm = () => {
     const fetchUserData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`https://final-qr-update-b.vercel.app/api/users/${userId}`);
+        const response = await axios.get(`https://final-b-red.vercel.app/api/users/${userId}`);
         console.log(response.data);  // Log the user data for debugging
         setFormData({
           ...response.data,
@@ -109,7 +109,7 @@ const EditQRForm = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/qrdata/${userId}`,
+        `https://final-b-red.vercel.app/api/qrdata/${userId}`,
         dataToSubmit
       );
 
@@ -193,13 +193,17 @@ const EditQRForm = () => {
                   onChange={handleInputChange}
                   required
                 />
-                <input
+                <div className="img-upload-in-form">
+              <input
                   type="file"
                   name="user_image"
-                  onChange={handleFileChange}
+                  onChange={handleImageChange}
                   accept="image/*"
+                  required
                 />
-                {formData.user_image && <img src={formData.user_image} width="100px" style={{borderRadius:"50%",marginTop:"30px"}} alt="User" />}
+              </div>
+              {formData.user_image && <img src={formData.user_image} width="80px"height="80px" style={{borderRadius:"50%",marginTop:"30px"}} alt="User" />}
+              </div>
               </div>
               <div className="right-side-form">
                 <input
