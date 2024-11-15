@@ -73,8 +73,11 @@ const QRForm = () => {
     e.preventDefault();
 
     try {
-        const response = await axios.post('https://final-b-red.vercel.app/api/qrdata', formData);
-
+       const response = await axios.post('https://final-b-red.vercel.app/api/qrdata', formData, {
+  headers: {
+    'Content-Type': 'application/json', // Ensure this matches the backend expectation
+  }
+});
         if (response.status === 201) {
             const { userId, qrdata } = response.data;
             setUserId(userId);
