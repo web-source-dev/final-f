@@ -58,26 +58,26 @@ const EditQRForm = () => {
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
-  
+
     // Validate file type and size
     if (file && !['image/jpeg', 'image/png', 'image/gif'].includes(file.type)) {
         setMessage('Invalid image format. Please upload a JPEG, PNG, or GIF file.');
         setMessageType('error');
         return;
     }
-  
+
     if (file && file.size > 5 * 1024 * 1024) { // 5MB limit
         setMessage('File size exceeds the 5MB limit.');
         setMessageType('error');
         return;
     }
-  
+
     // Prepare the form data for Cloudinary upload
     const uploadData = new FormData();
     uploadData.append('file', file);
     uploadData.append('upload_preset', uploadPreset);
     uploadData.append('cloud_name', cloudName);
-  
+
     try {
         const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, uploadData);
         if (response.status === 200) {
@@ -94,7 +94,6 @@ const EditQRForm = () => {
         setMessageType('error');
     }
   };
-  
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -110,10 +109,10 @@ const EditQRForm = () => {
     try {
       const response = await axios.put(
         `https://final-b-red.vercel.app/api/qrdata/${userId}`,
-        dataToSubmit,{
+        dataToSubmit, {
            headers: {
-    'Content-Type': 'application/json', // Ensure this matches the backend expectation
-  }
+             'Content-Type': 'application/json', // Ensure this matches the backend expectation
+           }
         });
 
       console.log(response);
@@ -197,16 +196,23 @@ const EditQRForm = () => {
                   required
                 />
                 <div className="img-upload-in-form">
-              <input
-                  type="file"
-                  name="user_image"
-                  onChange={handleFileChange}
-                  accept="image/*"
-                  required
-                />
-              </div>
-              {formData.user_image && <img src={formData.user_image} width="80px"height="80px" style={{borderRadius:"50%",marginTop:"30px"}} alt="User" />}
-              </div>
+                  <input
+                    type="file"
+                    name="user_image"
+                    onChange={handleFileChange}
+                    accept="image/*"
+                    required
+                  />
+                </div>
+                {formData.user_image && (
+                  <img
+                    src={formData.user_image}
+                    width="80px"
+                    height="80px"
+                    style={{ borderRadius: '50%', marginTop: '30px' }}
+                    alt="User"
+                  />
+                )}
               </div>
               <div className="right-side-form">
                 <input
