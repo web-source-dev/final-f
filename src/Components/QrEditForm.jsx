@@ -200,7 +200,7 @@ const EditQRForm = () => {
               <input
                   type="file"
                   name="user_image"
-                  onChange={handleImageChange}
+                  onChange={handleFileChange}
                   accept="image/*"
                   required
                 />
