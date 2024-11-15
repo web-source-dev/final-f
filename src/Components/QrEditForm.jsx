@@ -110,8 +110,11 @@ const EditQRForm = () => {
     try {
       const response = await axios.put(
         `https://final-b-red.vercel.app/api/qrdata/${userId}`,
-        dataToSubmit
-      );
+        dataToSubmit,{
+           headers: {
+    'Content-Type': 'application/json', // Ensure this matches the backend expectation
+  }
+        });
 
       console.log(response);
       setMessage('User updated successfully!');
