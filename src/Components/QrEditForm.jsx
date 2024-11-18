@@ -39,7 +39,6 @@ const EditQRForm = () => {
       setLoading(true);
       try {
         const response = await axios.get(https://final-b-red.vercel.app/api/users/${userId});
-        console.log(response.data);  // Log the user data for debugging
         setFormData({
           ...response.data,
           user_image: response.data.user_image || null,  // Don't overwrite image if already set
