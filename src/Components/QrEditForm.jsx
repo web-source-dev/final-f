@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -8,21 +7,17 @@ const EditQRForm = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-   first_name: '',
-    last_name: '',
+    name: '',
     email: '',
     work_email: '',
     organization: '',
     phone: '',
-    street: '',
-    city: '',
-    state: '',
-    zipcode: '',
+    address: '',
     youtube_url: '',
     facebook_url: '',
     linkden_url: '',
     twitter_url: '',
-    user_image: null,
+    user_image: null,  // To store the image file
   });
 
   const [message, setMessage] = useState('');
@@ -39,6 +34,7 @@ const EditQRForm = () => {
       setLoading(true);
       try {
         const response = await axios.get(https://final-b-red.vercel.app/api/users/${userId});
+        console.log(response.data);  // Log the user data for debugging
         setFormData({
           ...response.data,
           user_image: response.data.user_image || null,  // Don't overwrite image if already set
@@ -108,7 +104,7 @@ const EditQRForm = () => {
     // Prepare form data to be sent to the backend
     const dataToSubmit = {
       ...formData,  // Include the current form data
-      user_image: formData.user_image // Ensure the image field is not null
+      user_image: formData.user_image || null, // Ensure the image field is not null
     };
 
     try {
@@ -126,16 +122,12 @@ const EditQRForm = () => {
 
       // Optionally reset form data after successful update
       setFormData({
-        first_name: '',
-        last_name: '',
+        name: '',
         email: '',
         work_email: '',
         organization: '',
         phone: '',
-        street: '',
-        city: '',
-        state: '',
-        zipcode: '',
+        address: '',
         youtube_url: '',
         facebook_url: '',
         linkden_url: '',
@@ -168,17 +160,9 @@ const EditQRForm = () => {
               <div className="left-side-form">
                 <input
                   type="text"
-                  name="first_name"
-                  placeholder="First Name"
-                  value={formData.first_name}
-                  onChange={handleInputChange}
-                  required
-                />
-                 <input
-                  type="text"
-                  name="last_name"
-                  placeholder="Last Name"
-                  value={formData.last_name}
+                  name="name"
+                  placeholder="Name"
+                  value={formData.name}
                   onChange={handleInputChange}
                   required
                 />
@@ -197,7 +181,7 @@ const EditQRForm = () => {
                   onChange={handleInputChange}
                 />
                 <input
-                  type="number"
+                  type="text"
                   name="phone"
                   placeholder="Phone"
                   value={formData.phone}
@@ -206,33 +190,9 @@ const EditQRForm = () => {
                 />
                 <input
                   type="text"
-                  name="street"
-                  placeholder="Street"
-                  value={formData.street}
-                  onChange={handleInputChange}
-                  required
-                />
-                <input
-                  type="text"
-                  name="city"
-                  placeholder="City"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  required
-                />
-                <input
-                  type="text"
-                  name="state"
-                  placeholder="State"
-                  value={formData.state}
-                  onChange={handleInputChange}
-                  required
-                />
-                <input
-                  type="text"
-                  name="zipcode"
-                  placeholder="Zip Code"
-                  value={formData.zipcode}
+                  name="address"
+                  placeholder="Address"
+                  value={formData.address}
                   onChange={handleInputChange}
                   required
                 />
