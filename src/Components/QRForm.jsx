@@ -6,12 +6,16 @@ import { useNavigate } from 'react-router-dom';
 const QRForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
+    first_name: '',
+    last_name: '',
     email: '',
     work_email: '',
     organization: '',
     phone: '',
-    address: '',
+    street: '',
+    city: '',
+    state: '',
+    zip_code: '',
     youtube_url: '',
     facebook_url: '',
     linkden_url: '',
@@ -24,7 +28,6 @@ const QRForm = () => {
   const [messageType, setMessageType] = useState('');
   const [namedata, setNamedata] = useState('');
 
-  // Cloudinary credentials directly set in code
   const cloudName = 'dcvqytwuq';
   const uploadPreset = 'my_qr_preset';
 
@@ -35,74 +38,77 @@ const QRForm = () => {
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
-  
-    // Validate file type and size
+
     if (file && !['image/jpeg', 'image/png', 'image/gif'].includes(file.type)) {
-        setMessage('Invalid image format. Please upload a JPEG, PNG, or GIF file.');
-        setMessageType('error');
-        return;
+      setMessage('Invalid image format. Please upload a JPEG, PNG, or GIF file.');
+      setMessageType('error');
+      return;
     }
-  
-    if (file && file.size > 5 * 1024 * 1024) { // 5MB limit
-        setMessage('File size exceeds the 5MB limit.');
-        setMessageType('error');
-        return;
+
+    if (file && file.size > 5 * 1024 * 1024) {
+      setMessage('File size exceeds the 5MB limit.');
+      setMessageType('error');
+      return;
     }
-  
-    // Prepare the form data
+
     const uploadData = new FormData();
     uploadData.append('file', file);
     uploadData.append('upload_preset', uploadPreset);
     uploadData.append('cloud_name', cloudName);
-  
+
     try {
-        const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, uploadData);
-  
-        if (response.status === 200) {
-            const imageUrl = response.data.secure_url;
-            setFormData((prev) => ({ ...prev, user_image: imageUrl }));
-        }
+      const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, uploadData);
+
+      if (response.status === 200) {
+        const imageUrl = response.data.secure_url;
+        setFormData((prev) => ({ ...prev, user_image: imageUrl }));
+      }
     } catch (error) {
-        console.error('Error uploading image:', error);
-        setMessage('Error uploading image. Please try again.');
-        setMessageType('error');
+      console.error('Error uploading image:', error);
+      setMessage('Error uploading image. Please try again.');
+      setMessageType('error');
     }
   };
-  
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     try {
-       const response = await axios.post('https://final-b-red.vercel.app/api/qrdata', formData, {
-  headers: {
-    'Content-Type': 'application/json', // Ensure this matches the backend expectation
-  }
-});
-        if (response.status === 201) {
-            const { userId, qrdata } = response.data;
-            setUserId(userId);
-            setIsSubmitted(true);
-            setMessage('Form submitted successfully!');
-            setMessageType('success');
-            setNamedata(qrdata);
-            setFormData({
-                name: '',
-                email: '',
-                work_email: '',
-                organization: '',
-                phone: '',
-                address: '',
-                youtube_url: '',
-                facebook_url: '',
-                linkden_url: '',
-                twitter_url: '',
-                user_image: null, // Reset image field after submission
-            });
-        }
+      const response = await axios.post('https://final-b-red.vercel.app/api/qrdata', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status === 201) {
+        const { userId, qrdata } = response.data;
+        setUserId(userId);
+        setIsSubmitted(true);
+        setMessage('Form submitted successfully!');
+        setMessageType('success');
+        setNamedata(qrdata);
+        setFormData({
+          first_name: '',
+          last_name: '',
+          email: '',
+          work_email: '',
+          organization: '',
+          phone: '',
+          street: '',
+          city: '',
+          state: '',
+          zip_code: '',
+          youtube_url: '',
+          facebook_url: '',
+          linkden_url: '',
+          twitter_url: '',
+          user_image: null,
+        });
+      }
     } catch (error) {
-        console.error('Error submitting form:', error);
-        setMessage('Error: Please check the data.');
-        setMessageType('error');
+      console.error('Error submitting form:', error);
+      setMessage('Error: Please check the data.');
+      setMessageType('error');
     }
   };
 
@@ -129,7 +135,7 @@ const QRForm = () => {
     context.fillStyle = '#000000';
     context.font = '20px Arial';
     context.textAlign = 'center';
-    context.fillText(namedata.name, canvas.width / 2, 30);
+    context.fillText(`${namedata.first_name} ${namedata.last_name}`, canvas.width / 2, 30);
 
     context.drawImage(qrCanvas, padding, 50, qrCodeSize, qrCodeSize);
 
@@ -154,9 +160,17 @@ const QRForm = () => {
               <div className="left-side-form">
                 <input
                   type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={formData.name}
+                  name="first_name"
+                  placeholder="First Name"
+                  value={formData.first_name}
+                  onChange={handleInputChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="last_name"
+                  placeholder="Last Name"
+                  value={formData.last_name}
                   onChange={handleInputChange}
                   required
                 />
@@ -182,24 +196,24 @@ const QRForm = () => {
                   onChange={handleInputChange}
                   required
                 />
-                <input
-                  type="text"
-                  name="address"
-                  placeholder="Address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  required
-                />
-              <div className="img-upload-in-form">
-              <input
-                  type="file"
-                  name="user_image"
-                  onChange={handleImageChange}
-                  accept="image/*"
-                  required
-                />
-              </div>
-              {formData.user_image && <img src={formData.user_image} width="80px"height="80px" style={{borderRadius:"50%",marginTop:"30px"}} alt="User" />}
+                <div className="img-upload-in-form">
+                  <input
+                    type="file"
+                    name="user_image"
+                    onChange={handleImageChange}
+                    accept="image/*"
+                    required
+                  />
+                </div>
+                {formData.user_image && (
+                  <img
+                    src={formData.user_image}
+                    width="80px"
+                    height="80px"
+                    style={{ borderRadius: '50%', marginTop: '30px' }}
+                    alt="User"
+                  />
+                )}
               </div>
               <div className="right-side-form">
                 <input
@@ -207,6 +221,38 @@ const QRForm = () => {
                   name="organization"
                   placeholder="Organization"
                   value={formData.organization}
+                  onChange={handleInputChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="street"
+                  placeholder="Street"
+                  value={formData.street}
+                  onChange={handleInputChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="city"
+                  placeholder="City"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="state"
+                  placeholder="State"
+                  value={formData.state}
+                  onChange={handleInputChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="zip_code"
+                  placeholder="Zip Code"
+                  value={formData.zip_code}
                   onChange={handleInputChange}
                   required
                 />
@@ -240,7 +286,9 @@ const QRForm = () => {
                 />
               </div>
             </div>
-            <button className="submit-btn" type="submit">Submit</button>
+            <button className="submit-btn" type="submit">
+              Submit
+            </button>
             {message && (
               <p className={messageType === 'success' ? 'success-message' : 'error-message'}>
                 {message}
@@ -250,18 +298,17 @@ const QRForm = () => {
         ) : (
           <div className="form-submitted">
             <div id="qr-code-download" className="qr-code-container">
-              <h2>{namedata.name}</h2>
+              <h2>
+                {namedata.first_name} {namedata.last_name}
+              </h2>
               <QRCodeCanvas
                 id="qr-code-canvas"
                 value={`https://final-f-kohl.vercel.app/user/${userId}`}
                 size={300}
                 fgColor="#000000"
-                bgColor="#ffffff"
               />
-              <p>ID: {userId}</p>
+              <button onClick={downloadQRCode}>Download</button>
             </div>
-            <button onClick={downloadQRCode}>Download QR Code</button>
-            <button className="back-red" onClick={() => setIsSubmitted(false)}>Back</button>
           </div>
         )}
       </div>
