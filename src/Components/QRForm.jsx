@@ -6,16 +6,12 @@ import { useNavigate } from 'react-router-dom';
 const QRForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
+    name: '',
     email: '',
     work_email: '',
     organization: '',
     phone: '',
-    street: '',
-    city: '',
-    state: '',
-    zipcode: '',
+    address: '',
     youtube_url: '',
     facebook_url: '',
     linkden_url: '',
@@ -90,16 +86,12 @@ const QRForm = () => {
             setMessageType('success');
             setNamedata(qrdata);
             setFormData({
-                first_name: '',
-                last_name: '',
+                name: '',
                 email: '',
                 work_email: '',
                 organization: '',
                 phone: '',
-                street: '',
-                city: '',
-                state: '',
-                zipcode: '',
+                address: '',
                 youtube_url: '',
                 facebook_url: '',
                 linkden_url: '',
@@ -141,6 +133,7 @@ const QRForm = () => {
 
     context.drawImage(qrCanvas, padding, 50, qrCodeSize, qrCodeSize);
 
+    context.fillText(ID: ${userId}, canvas.width / 2, qrCodeSize + 80);
 
     const pngUrl = canvas.toDataURL('image/png');
     const a = document.createElement('a');
@@ -161,18 +154,11 @@ const QRForm = () => {
               <div className="left-side-form">
                 <input
                   type="text"
-                  name="first_name"
-                  placeholder="First Name"
-                  value={formData.first_name}
+                  name="name"
+                  placeholder="Name"
+                  value={formData.name}
                   onChange={handleInputChange}
                   required
-                />
-                 <input
-                  type="text"
-                  name="last_name"
-                  placeholder="Last_Name"
-                  value={formData.last_name}
-                  onChange={handleInputChange}
                 />
                 <input
                   type="email"
@@ -189,7 +175,7 @@ const QRForm = () => {
                   onChange={handleInputChange}
                 />
                 <input
-                  type="number"
+                  type="text"
                   name="phone"
                   placeholder="Phone"
                   value={formData.phone}
@@ -198,33 +184,9 @@ const QRForm = () => {
                 />
                 <input
                   type="text"
-                  name="street"
-                  placeholder="Street"
-                  value={formData.street}
-                  onChange={handleInputChange}
-                  required
-                />
-                 <input
-                  type="text"
-                  name="city"
-                  placeholder="City"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  required
-                />
-                 <input
-                  type="text"
-                  name="state"
-                  placeholder="State"
-                  value={formData.state}
-                  onChange={handleInputChange}
-                  required
-                />
-                 <input
-                  type="text"
-                  name="zipcode"
-                  placeholder="Zip Code"
-                  value={formData.zipcode}
+                  name="address"
+                  placeholder="Address"
+                  value={formData.address}
                   onChange={handleInputChange}
                   required
                 />
@@ -307,3 +269,4 @@ const QRForm = () => {
 };
 
 export default QRForm;
+
