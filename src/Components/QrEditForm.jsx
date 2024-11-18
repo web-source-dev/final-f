@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -33,7 +34,7 @@ const EditQRForm = () => {
     const fetchUserData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`https://final-b-red.vercel.app/api/users/${userId}`);
+        const response = await axios.get(https://final-b-red.vercel.app/api/users/${userId});
         console.log(response.data);  // Log the user data for debugging
         setFormData({
           ...response.data,
@@ -79,7 +80,7 @@ const EditQRForm = () => {
     uploadData.append('cloud_name', cloudName);
   
     try {
-        const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, uploadData);
+        const response = await axios.post(https://api.cloudinary.com/v1_1/${cloudName}/image/upload, uploadData);
         if (response.status === 200) {
             setFormData((prev) => ({
               ...prev,
@@ -109,7 +110,7 @@ const EditQRForm = () => {
 
     try {
       const response = await axios.put(
-        `https://final-b-red.vercel.app/api/qrdata/${userId}`,
+        https://final-b-red.vercel.app/api/qrdata/${userId},
         dataToSubmit,{
            headers: {
     'Content-Type': 'application/json', // Ensure this matches the backend expectation
@@ -263,3 +264,5 @@ const EditQRForm = () => {
 };
 
 export default EditQRForm;
+
+
