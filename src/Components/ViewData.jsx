@@ -119,18 +119,12 @@ const ViewData = () => {
     // Combine first and last name
     const fullName = `${user.first_name || ''} ${user.last_name || ''}`.toLowerCase();
 
-    // Check address fields
-    const addressString = user.address
-      .map((addr) => `${addr.street || ''} ${addr.city || ''} ${addr.state || ''} ${addr.zip || ''}`)
-      .join(' ')
-      .toLowerCase();
 
     const matchesSearch =
       fullName.includes(lowercasedQuery) ||
       (user.email || '').toLowerCase().includes(lowercasedQuery) ||
       (user.work_email || '').toLowerCase().includes(lowercasedQuery) ||
-      (user.phone || '').toLowerCase().includes(lowercasedQuery) ||
-      addressString.includes(lowercasedQuery);
+      (user.phone || '').toLowerCase().includes(lowercasedQuery)
 
     const matchesStatus =
       statusFilter === 'all' ||
@@ -208,11 +202,7 @@ const ViewData = () => {
                 <div className="flex-gap-bw-name">
                   {user.email && <p><strong>Email :</strong> {user.email}</p>}
                   {user.phone && <p><strong>Phone :</strong> {user.phone}</p>}
-                  {user.address && user.address.length > 0 && (
-                    user.address.map((addr, index) => (
-                      <p key={index}><strong>Address :</strong> {addr.street}, {addr.city}, {addr.state}, {addr.zip}</p>
-                    ))
-                  )}
+                      <p><strong>Address :</strong> {user.street}, {user.city}, {user.state}, {user.zip}</p>
                 </div>
                 <div className="flex-of-check-box-byn">
                   <label className="checkbox-label">
@@ -254,14 +244,11 @@ const ViewData = () => {
                   <p>Social Links</p>
                   <div className="links-of-each-user">
                     <div className="map-flex">
-                      {user.address && user.address.length > 0 && (
-                        user.address.map((addr, index) => (
                           <a
-                            key={index}
                             target='_blank'
                             rel='noopener noreferrer'
                             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                              `${addr.street}, ${addr.city}, ${addr.state}, ${addr.zip}`
+                              `${user.street}, ${user.city}, ${user.state}, ${user.zip}`
                             )}`}
                           >
                             <i className="ri-map-pin-fill"></i>
