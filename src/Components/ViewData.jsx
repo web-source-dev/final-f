@@ -14,6 +14,7 @@ const ViewData = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get('https://final-b-red.vercel.app/api/users');
+        console.log(response.data);
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -38,41 +39,41 @@ const ViewData = () => {
   const downloadQRCode = (userName, userId) => {
     const canvas = document.createElement('canvas');
     const qrCanvas = document.getElementById(`qr-code-canvas-${userId}`);
-  
+
     if (!qrCanvas) {
       console.error('QR Canvas not found');
       return;
     }
-  
+
     // Increase the size for better quality
-    const qrCodeSize = 500;  // Increase size for higher resolution
+    const qrCodeSize = 150;  // Increase size for higher resolution
     const padding = 50;
-  
+
     // Set canvas size to accommodate larger resolution
     canvas.width = qrCodeSize + padding * 2;
     canvas.height = qrCodeSize + 150;
-  
+
     const context = canvas.getContext('2d');
-  
+
     // Set the background to white
     context.fillStyle = '#FFFFFF';
     context.fillRect(0, 0, canvas.width, canvas.height);
-  
+
     // Set the text style
     context.fillStyle = '#000000';
-    context.font = '30px Arial'; // Increase font size for better visibility
+    context.font = '14px Arial'; // Increase font size for better visibility
     context.textAlign = 'center';
     context.fillText(userName, canvas.width / 2, 30);  // Adjusted position
-  
+
     // Draw the QR code on the canvas with padding
     context.drawImage(qrCanvas, padding, 50, qrCodeSize, qrCodeSize);
-  
+
     // Add user ID text (smaller font size for the ID)
     context.fillText(`ID: ${userId}`, canvas.width / 2, qrCodeSize + 80);
-  
+
     // Generate a high-quality PNG image
     const pngUrl = canvas.toDataURL('image/png', 1.0); // '1.0' ensures maximum quality
-  
+
     const a = document.createElement('a');
     a.href = pngUrl;
     a.download = `${userName}-qr.png`;
@@ -112,18 +113,28 @@ const ViewData = () => {
     }
   };
 
-  // Filter users based on search query and status
   const filteredUsers = users.filter((user) => {
     const lowercasedQuery = searchQuery.toLowerCase();
-    const matchesSearch = 
-      user.name.toLowerCase().includes(lowercasedQuery) ||
-      user.email.toLowerCase().includes(lowercasedQuery) ||
-      user.phone.toLowerCase().includes(lowercasedQuery) ||
-      user.address.toLowerCase().includes(lowercasedQuery);
+
+    // Combine first and last name
+    const fullName = `${user.first_name || ''} ${user.last_name || ''}`.toLowerCase();
+
+    // Check address fields
+    const addressString = user.address
+      .map((addr) => `${addr.street || ''} ${addr.city || ''} ${addr.state || ''} ${addr.zip || ''}`)
+      .join(' ')
+      .toLowerCase();
+
+    const matchesSearch =
+      fullName.includes(lowercasedQuery) ||
+      (user.email || '').toLowerCase().includes(lowercasedQuery) ||
+      (user.work_email || '').toLowerCase().includes(lowercasedQuery) ||
+      (user.phone || '').toLowerCase().includes(lowercasedQuery) ||
+      addressString.includes(lowercasedQuery);
 
     const matchesStatus =
-      statusFilter === 'all' || 
-      (statusFilter === 'active' && user.isAllowed) || 
+      statusFilter === 'all' ||
+      (statusFilter === 'active' && user.isAllowed) ||
       (statusFilter === 'inactive' && !user.isAllowed);
 
     return matchesSearch && matchesStatus;
@@ -133,30 +144,44 @@ const ViewData = () => {
     <div className="view-data-container">
       {/* Filter Section */}
       <div className="filter-from-all-users">
-        <h1>All Users</h1>
-        <div className="search-bar-container">
-          <input
-            type="text"
-            placeholder="Search by name, email, phone, or address"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-bar-input"
-          />
-        </div>
+  <div className="logo-of-harmony-4all">
+    <img
+      src="https://static.wixstatic.com/media/e65032_cd33c8b9dc8d4a4b986f7fa5ac06df3e~mv2.jpg/v1/crop/x_337,y_634,w_1319,h_753/fill/w_133,h_76,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Harmony%204%20All%20logo_G2%20(2).jpg"
+      alt="Harmony 4All"
+      className="logo-image"
+    />
+  </div>
 
-        <div className="status-filter-container">
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="status-filter-dropdown"
-          >
-            <option value="all">All</option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-          </select>
-        </div>
-        <button className="add-user-btn-all-page" onClick={() => navigate('/')}>Add User</button>
-      </div>
+  <h1>All Users</h1>
+
+  <button className="add-user-btn-all-page" onClick={() => navigate('/')}>
+    Add User
+  </button>
+</div>
+
+<div className="filter-meny-heren-sea">
+  <div className="search-bar-container">
+    <input
+      type="text"
+      placeholder="Search by name, email, phone, or address"
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      className="search-bar-input"
+    />
+  </div>
+
+  <div className="status-filter-container">
+    <select
+      value={statusFilter}
+      onChange={(e) => setStatusFilter(e.target.value)}
+      className="status-filter-dropdown"
+    >
+      <option value="all">All</option>
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+    </select>
+  </div>
+</div>
 
       {/* User List */}
       <div className="user-list">
@@ -168,7 +193,7 @@ const ViewData = () => {
               </div>
 
               <div className="flex-jfha">
-                <div className="image-name-flex">
+                <div className="image-name-flexd">
                   {user.user_image && (
                     <img
                       src={`${user.user_image}`}
@@ -178,12 +203,17 @@ const ViewData = () => {
                       onClick={() => handleImageClick(`${user.user_image}`)} // Open in popup
                     />
                   )}
-                  {user.name && <h3>{user.name}</h3>}
+                  {user.first_name && <h3>{user.first_name} <br /> {user.last_name}</h3>}
                 </div>
-                {user.email && <p>Email: {user.email}</p>}
-                {user.phone && <p>Phone: {user.phone}</p>}
-                {user.address && <p>Address: {user.address}</p>}
-
+                <div className="flex-gap-bw-name">
+                  {user.email && <p><strong>Email :</strong> {user.email}</p>}
+                  {user.phone && <p><strong>Phone :</strong> {user.phone}</p>}
+                  {user.address && user.address.length > 0 && (
+                    user.address.map((addr, index) => (
+                      <p key={index}><strong>Address :</strong> {addr.street}, {addr.city}, {addr.state}, {addr.zip}</p>
+                    ))
+                  )}
+                </div>
                 <div className="flex-of-check-box-byn">
                   <label className="checkbox-label">
                     <input
@@ -191,7 +221,7 @@ const ViewData = () => {
                       checked={user.isAllowed}
                       onChange={(e) => handleCheckboxChange(user._id, e.target.checked)}
                     />
-                    <span>Show QR Code</span>
+                    <span> Show Qr Code</span>
                   </label>
 
                   <div className="action-btn-for-each-user">
@@ -215,20 +245,30 @@ const ViewData = () => {
                       size={70}
                       onClick={() => handleQRCodeClick(`qr-code-canvas-${user._id}`)} // Open QR in popup
                     />
-                    <button className="all-users-page-download-btn-qr" onClick={() => downloadQRCode(user.name, user._id)}>
+                    <button className="all-users-page-download-btn-qr" onClick={() => downloadQRCode(user.first_name || user.name, user._id)}>
                       <i className="ri-download-line"></i>
                     </button>
                   </div>
                 )}
-                                                <div className="flex-name-links">
+                <div className="flex-name-links">
                   <p>Social Links</p>
                   <div className="links-of-each-user">
                     <div className="map-flex">
-                      {user.address && (
-                        <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${user.address}`}>
-                          <i className="ri-map-pin-fill"></i>
-                        </a>
+                      {user.address && user.address.length > 0 && (
+                        user.address.map((addr, index) => (
+                          <a
+                            key={index}
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                              `${addr.street}, ${addr.city}, ${addr.state}, ${addr.zip}`
+                            )}`}
+                          >
+                            <i className="ri-map-pin-fill"></i>
+                          </a>
+                        ))
                       )}
+
                     </div>
                     <div className="links-flex-all-user">
                       {(user.youtube_url || user.facebook_url || user.linkden_url || user.twitter_url) ? (
