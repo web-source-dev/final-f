@@ -253,8 +253,6 @@ const ViewData = () => {
                           >
                             <i className="ri-map-pin-fill"></i>
                           </a>
-                        ))
-                      )}
 
                     </div>
                     <div className="links-flex-all-user">
