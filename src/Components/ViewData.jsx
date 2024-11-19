@@ -200,7 +200,9 @@ const ViewData = () => {
                   {user.first_name && <h3>{user.first_name} <br /> {user.last_name}</h3>}
                 </div>
                 <div className="flex-gap-bw-name">
-                  {user.email && <p><strong>Email :</strong> {user.email}</p>}
+                  {user.email && 
+                     <strong>{user.email ? 'Email :' : 'Work Email'}</strong> {user.email ? user.email : user.work_email}
+                  }
                   {user.phone && <p><strong>Phone :</strong> {user.phone}</p>}
                       <p><strong>Address :</strong> {user.street}, {user.city}, {user.state}, {user.zip}</p>
                 </div>
