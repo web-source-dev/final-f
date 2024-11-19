@@ -36,7 +36,7 @@ const UserDetails = () => {
     if (user) {
       const vCardData = `BEGIN:VCARD
 VERSION:3.0
-FN:${user.name}
+FN:${user.first_name}
 TEL:${user.phone || ''}
 EMAIL:${user.email || ''}
 ORG:${user.organization || ''}
@@ -45,7 +45,7 @@ END:VCARD`;
       const blob = new Blob([vCardData], { type: 'text/vcard' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = `${user.name.replace(' ', '_')}_contact.vcf`;
+      link.download = `${user.first_name.replace(' ', '_')}_contact.vcf`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
