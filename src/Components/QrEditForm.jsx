@@ -209,14 +209,14 @@ const EditQRForm = () => {
                   type="text"
                   name="street"
                   placeholder="Street"
-                  value={addr.street}
+                  value={formData.street}
               onChange={handleInputChange}
                 />
                 <input
                   type="text"
                   name="city"
                   placeholder="City"
-                  value={addr.city}
+                  value={formData.city}
               onChange={handleInputChange}
                   
                 />
@@ -226,14 +226,14 @@ const EditQRForm = () => {
                   type="text"
                   name="state"
                   placeholder="State"
-                  value={addr.state}
+                  value={formData.state}
                   onChange={handleInputChange}
                 />
                 <input
                   type="text"
                   name="zip"
                   placeholder="ZIP"
-                  value={addr.zip}
+                  value={formData.zip}
                   onChange={handleInputChange}
                 />
               
