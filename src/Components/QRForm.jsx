@@ -304,7 +304,7 @@ const QRForm = () => {
               <h2>{namedata.name}</h2>
               <QRCodeCanvas
                 id="qr-code-canvas"
-                value={`https://final-f-kohl.vercel.app/user/${userId}`}
+                value={`https://harmony-4all.vercel.app/${userId}`}
                 size={300}
                 fgColor="#000000"
                 bgColor="#ffffff"
