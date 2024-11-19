@@ -13,9 +13,10 @@ const EditQRForm = () => {
     work_email: '',
     organization: '',
     phone: '',
-    address: [
-      { street: '', city: '', state: '', zip: '' }, // Initialize address array
-    ],
+    street: '',
+    city: '',
+    state: '',
+    zip: '',
     youtube_url: '',
     facebook_url: '',
     linkden_url: '',
@@ -97,15 +98,6 @@ const EditQRForm = () => {
         setMessageType('error');
     }
   };
-  const handleAddressChange = (e, index) => {
-    const { name, value } = e.target;
-    setFormData((prev) => {
-      const updatedAddresses = [...prev.address];
-      updatedAddresses[index][name] = value;
-      return { ...prev, address: updatedAddresses };
-    });
-  };
-  
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -136,7 +128,10 @@ const EditQRForm = () => {
         work_email: '',
         organization: '',
         phone: '',
-        address: '',
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
         youtube_url: '',
         facebook_url: '',
         linkden_url: '',
@@ -209,22 +204,21 @@ const EditQRForm = () => {
               onChange={handleInputChange}
               required
             />
-            {formData.address.map((addr, index) => (
-              <div key={index}>
                 <div className="zip-flex-conm" style={{display:'flex',gap:"10px"}}>
                 <input
                   type="text"
                   name="street"
                   placeholder="Street"
                   value={addr.street}
-                  onChange={(e) => handleAddressChange(e, index)}
+              onChange={handleInputChange}
                 />
                 <input
                   type="text"
                   name="city"
                   placeholder="City"
                   value={addr.city}
-                  onChange={(e) => handleAddressChange(e, index)}
+              onChange={handleInputChange}
+                  
                 />
                 </div>
                 <div className="zip-flex-conme" style={{display:'flex',gap:"10px"}}>
@@ -233,19 +227,17 @@ const EditQRForm = () => {
                   name="state"
                   placeholder="State"
                   value={addr.state}
-                  onChange={(e) => handleAddressChange(e, index)}
+                  onChange={handleInputChange}
                 />
                 <input
                   type="text"
                   name="zip"
                   placeholder="ZIP"
                   value={addr.zip}
-                  onChange={(e) => handleAddressChange(e, index)}
+                  onChange={handleInputChange}
                 />
               
                 </div>
-                </div>
-            ))}
                 <input
                   type="file"
                   name="user_image"
