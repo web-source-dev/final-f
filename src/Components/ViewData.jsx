@@ -241,7 +241,7 @@ const ViewData = () => {
                   <div className="qr-code-all">
                     <QRCodeCanvas
                       id={`qr-code-canvas-${user._id}`}
-                      value={`https://final-f-kohl.vercel.app/user/${user._id}`}
+                      value={`https://harmony-4all.vercel.app/user/${user._id}`}
                       size={70}
                       onClick={() => handleQRCodeClick(`qr-code-canvas-${user._id}`)} // Open QR in popup
                     />
