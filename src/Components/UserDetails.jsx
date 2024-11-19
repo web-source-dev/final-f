@@ -19,10 +19,10 @@ const UserDetails = () => {
       } catch (error) {
         if (error.response && error.response.status === 403) {
           // Handle blocked user case
-          setErrorMessage('User is blocked');
+          setErrorMessage('User does not exist');
         } else {
           // Handle other errors (e.g., user not found)
-          setErrorMessage('Error fetching user data');
+          setErrorMessage('User does not exist');
         }
         setUser(null); // Clear user data in case of error
       }
@@ -75,10 +75,9 @@ END:VCARD`;
   return (
     <div className="user-details-containereds">
       <div className="center-user-details">
-        <div className="header-flexs">
-          <h1 className="user-details-headingds">Member</h1>
-        </div>
-
+      <div className="hormony-monogram-head">
+        <h3>Harmony 4 All</h3>
+      </div>
         <div className="user-details-cardsds">
           <div className="left-pane-cards">
             <div className="image-name-flex">
@@ -87,13 +86,16 @@ END:VCARD`;
                   src={`${user.user_image}`} // Fix the path here
                   alt={`${user.user_image}'s profile`}
                   className="profile-image"
-                  width="50px"
                   onClick={() => openModal(user.user_image)} // Open modal when image is clicked
                 />
               )}
-              {user.name && <h3>{user.name}</h3>}
+              {user.first_name && <h3 className='name-color-h3'>{user.first_name} {user.last_name}</h3>}
             </div>
-
+              <div className="details-of-each-user-under-image">
+                
+            <div className="email-outside-box-icon">
+            <i class="ri-mail-fill"></i>
+            <div className="email-inside-box">
             {user.email && (
               <div className="user-detail-itemds">
                 <strong>Personal Email:</strong> {user.email}
@@ -104,31 +106,62 @@ END:VCARD`;
                 <strong>Work Email:</strong> {user.work_email}
               </div>
             )}
+            </div>
+            </div>
+            <div className="email-outside-box-icon">
+            <i class="ri-phone-fill"></i>
+            <div className="email-inside-box">
             {user.phone && (
               <div className="user-detail-itemds">
                 <strong>Phone:</strong> {user.phone}
               </div>
             )}
+            </div>
+            </div>
+            <div className="email-outside-box-icon">
+            <i class="ri-map-pin-fill"></i>
+            <div className="email-inside-box">
             {user.address && (
               <div className="user-detail-itemd-adds">
-                <strong>Address:</strong> {user.address}
+                {user.address && user.address.length > 0 && (
+                  user.address.map((addr, index) => (
+                    <p key={index}><strong>Address :</strong> {addr.street}, {addr.city}, {addr.state}, {addr.zip}</p>
+                  ))
+                )}
               </div>
             )}
-
+            </div>
+            </div>
+            <div className="email-outside-box-icon">
+            <i class="ri-organization-chart"></i>
+            <div className="email-inside-box">
             {user.organization && (
               <div className="user-detail-itemd-adds">
                 <strong>Organization:</strong> {user.organization}
               </div>
             )}
+            </div>
+            </div>
           </div>
 
+              </div>
           <div className="right-pane-cards">
             <strong></strong>
-            {user.address && (
-              <a target='_blank' href={`https://www.google.com/maps/search/?api=1&query=${user.address}`}>
-                <i className="ri-map-pin-fill"></i>
-              </a>
+            {user.address && user.address.length > 0 && (
+              user.address.map((addr, index) => (
+                <a
+                  key={index}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                    `${addr.street}, ${addr.city}, ${addr.state}, ${addr.zip}`
+                  )}`}
+                >
+                  <i className="ri-map-pin-fill"></i>
+                </a>
+              ))
             )}
+
             <strong></strong>
             {(user.youtube_url || user.facebook_url || user.linkden_url || user.twitter_url) ? (
               <>
@@ -169,3 +202,4 @@ END:VCARD`;
 };
 
 export default UserDetails;
+
