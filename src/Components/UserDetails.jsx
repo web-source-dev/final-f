@@ -123,11 +123,7 @@ END:VCARD`;
             <div className="email-inside-box">
             {user.address && (
               <div className="user-detail-itemd-adds">
-                {user.address && user.address.length > 0 && (
-                  user.address.map((addr, index) => (
-                    <p key={index}><strong>Address :</strong> {addr.street}, {addr.city}, {addr.state}, {addr.zip}</p>
-                  ))
-                )}
+                    <p><strong>Address :</strong> {user.street}, {user.city}, {user.state}, {user.zip}</p>
               </div>
             )}
             </div>
@@ -147,20 +143,15 @@ END:VCARD`;
               </div>
           <div className="right-pane-cards">
             <strong></strong>
-            {user.address && user.address.length > 0 && (
-              user.address.map((addr, index) => (
                 <a
-                  key={index}
                   target='_blank'
                   rel='noopener noreferrer'
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                    `${addr.street}, ${addr.city}, ${addr.state}, ${addr.zip}`
+                    `${user.street}, ${user.city}, ${user.state}, ${user.zip}`
                   )}`}
                 >
                   <i className="ri-map-pin-fill"></i>
                 </a>
-              ))
-            )}
 
             <strong></strong>
             {(user.youtube_url || user.facebook_url || user.linkden_url || user.twitter_url) ? (
