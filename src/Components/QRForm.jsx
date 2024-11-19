@@ -6,12 +6,15 @@ import { useNavigate } from 'react-router-dom';
 const QRForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
+    first_name: '',
+    last_name: '',
     email: '',
     work_email: '',
     organization: '',
     phone: '',
-    address: '',
+    address: [
+      { street: '', city: '', state: '', zip: '' }, // Initialize address array
+    ],
     youtube_url: '',
     facebook_url: '',
     linkden_url: '',
@@ -32,6 +35,15 @@ const QRForm = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+  const handleAddressChange = (e, index) => {
+    const { name, value } = e.target;
+    setFormData((prev) => {
+      const updatedAddresses = [...prev.address];
+      updatedAddresses[index][name] = value;
+      return { ...prev, address: updatedAddresses };
+    });
+  };
+
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -56,7 +68,7 @@ const QRForm = () => {
     uploadData.append('cloud_name', cloudName);
   
     try {
-        const response = await axios.post(https://api.cloudinary.com/v1_1/${cloudName}/image/upload, uploadData);
+        const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, uploadData);
   
         if (response.status === 200) {
             const imageUrl = response.data.secure_url;
@@ -73,11 +85,8 @@ const QRForm = () => {
     e.preventDefault();
 
     try {
-       const response = await axios.post('https://final-b-red.vercel.app/api/qrdata', formData, {
-  headers: {
-    'Content-Type': 'application/json', // Ensure this matches the backend expectation
-  }
-});
+        const response = await axios.post('https://final-b-red.vercel.app/api/qrdata', formData);
+
         if (response.status === 201) {
             const { userId, qrdata } = response.data;
             setUserId(userId);
@@ -86,7 +95,8 @@ const QRForm = () => {
             setMessageType('success');
             setNamedata(qrdata);
             setFormData({
-                name: '',
+                first_name: '',
+                last_name: '',
                 email: '',
                 work_email: '',
                 organization: '',
@@ -133,7 +143,7 @@ const QRForm = () => {
 
     context.drawImage(qrCanvas, padding, 50, qrCodeSize, qrCodeSize);
 
-    context.fillText(ID: ${userId}, canvas.width / 2, qrCodeSize + 80);
+    context.fillText(`ID: ${userId}`, canvas.width / 2, qrCodeSize + 80);
 
     const pngUrl = canvas.toDataURL('image/png');
     const a = document.createElement('a');
@@ -145,51 +155,92 @@ const QRForm = () => {
   return (
     <div className="center-form-c">
       <div className="qr-form-container">
-        <button onClick={() => navigate('/data')}>All users</button>
+        <button className='all-user-btn' onClick={() => navigate('/data')}>All users</button>
         <h1>Form Submission</h1>
 
         {!isSubmitted ? (
           <form className="qr-form" onSubmit={handleFormSubmit}>
             <div className="form-inputs-flex">
               <div className="left-side-form">
+                
+              <div className="zip-flex-conm" style={{display:'flex',gap:"10px"}}>
+              <input
+              type="text"
+              name="first_name"
+              placeholder="First Name"
+              value={formData.first_name}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="text"
+              name="last_name"
+              placeholder="Last Name"
+              value={formData.last_name}
+              onChange={handleInputChange}
+            />
+            </div>
+            <div className="zip-flex-conm" style={{display:'flex',gap:"10px"}}>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+            <input
+              type="email"
+              name="work_email"
+              placeholder="Work Email"
+              value={formData.work_email}
+              onChange={handleInputChange}
+            />
+            </div>
+            <input
+              type="text"
+              name="phone"
+              placeholder="Phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              required
+            />
+            {formData.address.map((addr, index) => (
+              <div key={index}>
+                <div className="zip-flex-conm" style={{display:'flex',gap:"10px"}}>
                 <input
                   type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="email"
-                  name="work_email"
-                  placeholder="Work Email"
-                  value={formData.work_email}
-                  onChange={handleInputChange}
+                  name="street"
+                  placeholder="Street"
+                  value={addr.street}
+                  onChange={(e) => handleAddressChange(e, index)}
                 />
                 <input
                   type="text"
-                  name="phone"
-                  placeholder="Phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  required
+                  name="city"
+                  placeholder="City"
+                  value={addr.city}
+                  onChange={(e) => handleAddressChange(e, index)}
+                />
+                </div>
+                <div className="zip-flex-conme" style={{display:'flex',gap:"10px"}}>
+                <input
+                  type="text"
+                  name="state"
+                  placeholder="State"
+                  value={addr.state}
+                  onChange={(e) => handleAddressChange(e, index)}
                 />
                 <input
                   type="text"
-                  name="address"
-                  placeholder="Address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  required
+                  name="zip"
+                  placeholder="ZIP"
+                  value={addr.zip}
+                  onChange={(e) => handleAddressChange(e, index)}
                 />
+              
+                </div>
+                </div>
+            ))}
               <div className="img-upload-in-form">
               <input
                   type="file"
@@ -253,11 +304,12 @@ const QRForm = () => {
               <h2>{namedata.name}</h2>
               <QRCodeCanvas
                 id="qr-code-canvas"
-                value={https://final-f-kohl.vercel.app/user/${userId}}
+                value={`https://final-f-kohl.vercel.app/user/${userId}`}
                 size={300}
                 fgColor="#000000"
                 bgColor="#ffffff"
               />
+              <p>ID: {userId}</p>
             </div>
             <button onClick={downloadQRCode}>Download QR Code</button>
             <button className="back-red" onClick={() => setIsSubmitted(false)}>Back</button>
@@ -269,4 +321,5 @@ const QRForm = () => {
 };
 
 export default QRForm;
+
 
