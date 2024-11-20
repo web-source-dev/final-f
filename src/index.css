@@ -1330,12 +1330,12 @@ input[type="file"]::-webkit-file-upload-button{
 }
 
 .two-fa-container input {
-  width: calc(100% - 20px);
   padding: 10px;
   border: 1px solid black;
   border-radius: 5px;
   margin-bottom: 15px;
   font-size: 14px;
+  width:100%;
   box-sizing: border-box;
 }
 
