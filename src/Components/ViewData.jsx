@@ -250,18 +250,30 @@ const ViewData = () => {
                   {user.first_name && <h3>{user.first_name} <br /> {user.last_name}</h3>}
                 </div>
                 <div className="flex-gap-bw-name">
-                  {(user.email) && (
-  <p>
-    <strong>Email :</strong> {user.email}
-  </p>
-)}
-                           {(user.work_email) && (
-  <p>
-    <strong>Work Email :</strong> {user.work_email}
-  </p>
+                  {user.email && (
+  <div className="user-detail-itemds">
+    <a href={`mailto:${user.email}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      {user.email}
+    </a>
+  </div>
 )}
 
-                  {user.phone && <p><strong>Phone :</strong> {user.phone}</p>}
+{user.work_email && (
+  <div className="user-detail-itemds">
+    <a href={`mailto:${user.work_email}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      {user.work_email}
+    </a>
+  </div>
+)}
+
+{user.phone && (
+  <div className="user-detail-itemds">
+    <a href={`tel:${user.phone}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      {user.phone}
+    </a>
+  </div>
+)}
+
                       <p><strong>Address :</strong> {user.street}, {user.city}, {user.state}, {user.zip}</p>
                 </div>
                 <div className="flex-of-check-box-byn">
