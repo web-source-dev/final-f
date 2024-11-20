@@ -122,7 +122,7 @@ END:VCARD`;
             <i class="ri-map-pin-fill"></i>
             <div className="email-inside-box">
               <div className="user-detail-itemd-adds">
-                   {user.street}, {user.city}, {user.state}, {user.zip}</p>
+                  <p>{user.street}, {user.city}, {user.state}, {user.zip}</p>
               </div>
             </div>
             </div>
