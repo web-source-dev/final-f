@@ -1289,6 +1289,9 @@ input[type="file"]::-webkit-file-upload-button{
   .qr-form-container {
     padding: 20px;
   }
+  btn-of-download-qr{
+    flex-direction:column;
+  }
 
   .form-inputs-flex {
     flex-direction: column;
@@ -1376,4 +1379,12 @@ input[type="file"]::-webkit-file-upload-button{
   margin-top: 15px;
   font-size: 14px;
   text-align: center;
+}
+.btn-of-download-qr{
+  display:flex;
+  gap:15px;
+}
+.download-btn-of-qr{
+  background:#ff0ff8;
+  color:#000f32;
 }
