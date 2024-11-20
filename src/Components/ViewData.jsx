@@ -253,7 +253,7 @@ const ViewData = () => {
                   {user.email && (
   <div className="user-detail-itemds">
     <a href={`mailto:${user.email}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-      {user.email}
+      <strong>Email :</strong>{user.email}
     </a>
   </div>
 )}
@@ -261,7 +261,7 @@ const ViewData = () => {
 {user.work_email && (
   <div className="user-detail-itemds">
     <a href={`mailto:${user.work_email}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-      {user.work_email}
+      <strong>Work Email :</strong> {user.work_email}
     </a>
   </div>
 )}
@@ -269,7 +269,7 @@ const ViewData = () => {
 {user.phone && (
   <div className="user-detail-itemds">
     <a href={`tel:${user.phone}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-      {user.phone}
+      <strong>Phone :</strong> {user.phone}
     </a>
   </div>
 )}
