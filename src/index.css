@@ -1499,3 +1499,9 @@ input[type="file"]::-webkit-file-upload-button{
     padding: 10px; /* Adjust padding */
   }
 }
+.image-name-flexes img{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  object-fit:cover;
+}
