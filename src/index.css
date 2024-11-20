@@ -1289,10 +1289,6 @@ input[type="file"]::-webkit-file-upload-button{
   .qr-form-container {
     padding: 20px;
   }
-  btn-of-download-qr{
-    flex-direction:column;
-  }
-
   .form-inputs-flex {
     flex-direction: column;
   }
@@ -1380,11 +1376,126 @@ input[type="file"]::-webkit-file-upload-button{
   font-size: 14px;
   text-align: center;
 }
-.btn-of-download-qr{
-  display:flex;
-  gap:15px;
+/* Container for the QR code */
+.qr-code-container-s {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
 }
-.download-btn-of-qr{
-  background:#ff0ff8;
-  color:#000f32;
+
+.qr-code-container-s h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.qr-code-container-s .qr-code-canvas {
+  margin-bottom: 20px;
+}
+
+/* Container for the buttons */
+.btn-of-download-qr {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+}
+
+/* Styling for the "Download QR Code" button */
+.download-btn-of-qr {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 150px; /* Ensures button has a minimum width */
+}
+
+.download-btn-of-qr:hover {
+  background-color: #45a049;
+}
+
+.download-btn-of-qr:focus {
+  outline: none;
+}
+
+/* Styling for the "Back" button */
+.back-reds {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 150px; /* Ensures button has a minimum width */
+}
+
+.back-reds:hover {
+  background-color: #e53935;
+}
+
+.back-reds:focus {
+  outline: none;
+}
+
+/* Media Query for Small Screens (Tablets, Mobile Portrait) */
+@media screen and (max-width: 768px) {
+  .qr-code-container-s {
+    padding: 15px; /* Reduced padding on smaller screens */
+    max-width: 90%; /* Container takes more space */
+  }
+
+  .qr-code-container-s h2 {
+    font-size: 20px; /* Smaller font size for heading */
+  }
+
+  .qr-code-container-s .qr-code-canvas {
+    width: 250px; /* Adjust QR code size */
+    height: 250px;
+  }
+
+  .btn-of-download-qr {
+    flex-direction: column; /* Stack the buttons vertically */
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .download-btn-of-qr,
+  .back-reds {
+    min-width: 100%; /* Buttons take up full width */
+    padding: 12px; /* Adjust padding */
+    font-size: 14px; /* Smaller font size */
+  }
+}
+
+/* Media Query for Very Small Screens (Mobile Landscape and below) */
+@media screen and (max-width: 480px) {
+  .qr-code-container-s h2 {
+    font-size: 18px; /* Further reduce heading size */
+  }
+
+  .qr-code-container-s .qr-code-canvas {
+    width: 200px; /* Further reduce QR code size */
+    height: 200px;
+  }
+
+  .download-btn-of-qr,
+  .back-reds {
+    font-size: 12px; /* Smaller font for very small screens */
+    padding: 10px; /* Adjust padding */
+  }
 }
