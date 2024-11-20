@@ -168,8 +168,8 @@ const ViewData = () => {
   </div>
       <div className="two-fa-container">
 
-        <h1>Two-Factor Authentication</h1>
-        <p>Please answer the security question to continue:</p>
+        <h1>Brain Teaser</h1>
+        <p style={{ textAlign: "center" }}>I bet you won't answer this question...</p>
         <p><strong>Which city is known as the "Big Apple"?</strong></p>
         <input
           type="text"
