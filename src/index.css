@@ -271,7 +271,7 @@ body.dark-mode .center-user-details {
 
 .user-detail-itemds,
 .user-detail-itemd-adds {
-  font-size: 12px;
+  font-size: 1.1rem;
   max-width: 80%; /* Limit the width to 80% of the container */
   word-wrap: break-word; /* Break words when necessary */
   margin: 12px 0;
@@ -385,7 +385,13 @@ body.dark-mode .user-detail-itemd-adds {
   .center-user-details {
     padding: 25px;
   }
-
+.user-detail-itemds,
+.user-detail-itemd-adds {
+  font-size: 12px;
+  max-width: 80%; /* Limit the width to 80% of the container */
+  word-wrap: break-word; /* Break words when necessary */
+  white-space: normal; /* Ensure text wraps to the next line */
+}
   .user-details-cardsds {
     flex-direction: column;
   }
