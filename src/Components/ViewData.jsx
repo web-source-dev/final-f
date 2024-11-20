@@ -69,7 +69,6 @@ const ViewData = () => {
     context.drawImage(qrCanvas, padding, 50, qrCodeSize, qrCodeSize);
 
     // Add user ID text (smaller font size for the ID)
-    context.fillText(`ID: ${userId}`, canvas.width / 2, qrCodeSize + 80);
 
     // Generate a high-quality PNG image
     const pngUrl = canvas.toDataURL('image/png', 1.0); // '1.0' ensures maximum quality
@@ -148,7 +147,7 @@ const ViewData = () => {
 
   <h1>All Users</h1>
 
-  <button className="add-user-btn-all-page" onClick={() => navigate('/')}>
+  <button className="add-user-btn-all-page" onClick={() => navigate('/qrform')}>
     Add User
   </button>
 </div>
