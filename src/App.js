@@ -14,7 +14,7 @@ const AppContent = () => {
     setLoading(true); // Show loading screen when route changes
     const timer = setTimeout(() => {
       setLoading(false); // Hide loading screen after a delay
-    }, 5000); // Set to 1 second or however long you want the loading screen to appear
+    }, 3000); // Set to 1 second or however long you want the loading screen to appear
 
     // Cleanup the timer if the component unmounts or location changes
     return () => clearTimeout(timer);
@@ -25,7 +25,7 @@ const AppContent = () => {
     return (
       <div className="loading-screen">
         <div className="spinner"></div>
-        <h2>Loading...</h2>
+        <h2><span style={{color:"#1fc45f"}}>Please Wait</span> Loading...</h2>
       </div>
     );
   }
