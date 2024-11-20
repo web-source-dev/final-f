@@ -271,8 +271,11 @@ body.dark-mode .center-user-details {
 
 .user-detail-itemds,
 .user-detail-itemd-adds {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  max-width: 80%; /* Limit the width to 80% of the container */
+  word-wrap: break-word; /* Break words when necessary */
   margin: 12px 0;
+  white-space: normal; /* Ensure text wraps to the next line */
 }
 
 .user-detail-itemds strong,
