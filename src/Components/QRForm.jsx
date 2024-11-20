@@ -198,7 +198,7 @@ const QRForm = () => {
             />
             </div>
             <input
-              type="text"
+              type="number"
               name="phone"
               placeholder="Phone"
               value={formData.phone}
