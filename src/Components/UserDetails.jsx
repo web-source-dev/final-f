@@ -96,26 +96,35 @@ END:VCARD`;
             <div className="email-outside-box-icon">
             <i class="ri-mail-fill"></i>
             <div className="email-inside-box">
-            {user.email && (
-              <div className="user-detail-itemds">
-                {user.email}
-              </div>
-            )}
-            {user.work_email && (
-              <div className="user-detail-itemds">
-                {user.work_email}
-              </div>
-            )}
+           {user.email && (
+  <div className="user-detail-itemds">
+    <a href={`mailto:${user.email}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      {user.email}
+    </a>
+  </div>
+)}
+
+          {user.work_email && (
+  <div className="user-detail-itemds">
+    <a href={`mailto:${user.work_email}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      {user.work_email}
+    </a>
+  </div>
+)}
+
             </div>
             </div>
             <div className="email-outside-box-icon">
             <i class="ri-phone-fill"></i>
             <div className="email-inside-box">
-            {user.phone && (
-              <div className="user-detail-itemds">
-                {user.phone}
-              </div>
-            )}
+         {user.phone && (
+  <div className="user-detail-itemds">
+    <a href={`tel:${user.phone}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      {user.phone}
+    </a>
+  </div>
+)}
+
             </div>
             </div>
             <div className="email-outside-box-icon">
