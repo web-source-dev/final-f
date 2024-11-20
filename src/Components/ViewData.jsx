@@ -82,6 +82,10 @@ const ViewData = () => {
     // Draw the QR code on the canvas with padding
     context.drawImage(qrCanvas, padding, 50, qrCodeSize, qrCodeSize);
 
+    
+    context.fillText(`${namedata.first_name} ${namedata.last_name}`, canvas.width / 2, 30);    
+    context.fillText(`https://www.harmony4all.org`, canvas.width / 2, qrCodeSize + 80);
+
     // Add user ID text (smaller font size for the ID)
 
     // Generate a high-quality PNG image
@@ -289,7 +293,7 @@ const ViewData = () => {
                       size={70}
                       onClick={() => handleQRCodeClick(`qr-code-canvas-${user._id}`)} // Open QR in popup
                     />
-                    <button className="all-users-page-download-btn-qr" onClick={() => downloadQRCode(user.first_name || user.name, user._id)}>
+                    <button className="all-users-page-download-btn-qr" onClick={() => downloadQRCode(user.first_name, user._id)}>
                       <i className="ri-download-line"></i>
                     </button>
                   </div>
