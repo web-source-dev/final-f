@@ -177,7 +177,7 @@ const handleInputChange = (e) => {
             />
             </div>
             <input
-              type="text"
+              type="number"
               name="phone"
               placeholder="Phone"
               value={formData.phone}
