@@ -98,12 +98,12 @@ END:VCARD`;
             <div className="email-inside-box">
             {user.email && (
               <div className="user-detail-itemds">
-                <strong>Personal Email:</strong><br />{user.email}
+                {user.email}
               </div>
             )}
             {user.work_email && (
               <div className="user-detail-itemds">
-                <strong>Work Email:</strong><br />{user.work_email}
+                {user.work_email}
               </div>
             )}
             </div>
@@ -113,7 +113,7 @@ END:VCARD`;
             <div className="email-inside-box">
             {user.phone && (
               <div className="user-detail-itemds">
-                <strong>Phone:</strong> {user.phone}
+                {user.phone}
               </div>
             )}
             </div>
@@ -122,7 +122,7 @@ END:VCARD`;
             <i class="ri-map-pin-fill"></i>
             <div className="email-inside-box">
               <div className="user-detail-itemd-adds">
-                    <p><strong>Address :</strong> {user.street}, {user.city}, {user.state}, {user.zip}</p>
+                   {user.street}, {user.city}, {user.state}, {user.zip}</p>
               </div>
             </div>
             </div>
@@ -131,7 +131,7 @@ END:VCARD`;
             <div className="email-inside-box">
             {user.organization && (
               <div className="user-detail-itemd-adds">
-                <strong>Organization:</strong> {user.organization}
+               {user.organization}
               </div>
             )}
             </div>
