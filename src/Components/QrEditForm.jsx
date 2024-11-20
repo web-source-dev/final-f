@@ -140,7 +140,7 @@ const EditQRForm = () => {
       });
 
       // Redirect to user list page after successful update
-      navigate('/data');
+      navigate('/');
     } catch (error) {
       console.error('Error submitting form:', error);
       setMessage('Error: Could not update user data');
@@ -153,7 +153,7 @@ const EditQRForm = () => {
   return (
     <div className="center-form-c">
       <div className="qr-form-container">
-        <button className='all-user-btn' onClick={() => navigate('/data')}>All users</button>
+        <button className='all-user-btn' onClick={() => navigate('/')}>All Members</button>
         <h1>Edit User</h1>
 
         {loading ? (
