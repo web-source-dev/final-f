@@ -156,7 +156,7 @@ const QRForm = () => {
   return (
     <div className="center-form-c">
       <div className="qr-form-container">
-        <button className='all-user-btn' onClick={() => navigate('/data')}>All users</button>
+        <button className='all-user-btn' onClick={() => navigate('/')}>All users</button>
         <h1>Form Submission</h1>
 
         {!isSubmitted ? (
