@@ -22,7 +22,7 @@ const [error, setError] = useState('');
 
   const handleQuestionCheck = async () => {
     try {
-      const checkres = await axios.post(`https://final-b-red.vercel.app/api/check2fa`, questiondt);
+      const checkres = await axios.post(`https://final-b-red.vercel.app/api/checkfa`, questiondt);
       if (checkres.data.fasts === 0) {
         setIsAnswerCorrect(true); // Set to true if the answer is correct
       } else {
