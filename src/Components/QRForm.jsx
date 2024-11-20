@@ -140,11 +140,10 @@ const QRForm = () => {
     context.fillStyle = '#000000';
     context.font = '20px Arial';
     context.textAlign = 'center';
-    context.fillText(namedata.name, canvas.width / 2, 30);
+    context.fillText(namedata.first_name, canvas.width / 2, 30);
 
     context.drawImage(qrCanvas, padding, 50, qrCodeSize, qrCodeSize);
 
-    context.fillText(`ID: ${userId}`, canvas.width / 2, qrCodeSize + 80);
 
     const pngUrl = canvas.toDataURL('image/png');
     const a = document.createElement('a');
@@ -298,7 +297,7 @@ const QRForm = () => {
         ) : (
           <div className="form-submitted">
             <div id="qr-code-download" className="qr-code-container">
-              <h2>{namedata.name}</h2>
+              <h2>{namedata.first_name}</h2>
               <QRCodeCanvas
                 id="qr-code-canvas"
                 value={`https://harmony-4all.vercel.app/user/${userId}`}
@@ -306,7 +305,6 @@ const QRForm = () => {
                 fgColor="#000000"
                 bgColor="#ffffff"
               />
-              <p>ID: {userId}</p>
             </div>
             <button onClick={downloadQRCode}>Download QR Code</button>
             <button className="back-red" onClick={() => setIsSubmitted(false)}>Back</button>
