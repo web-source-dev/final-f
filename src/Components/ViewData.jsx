@@ -14,16 +14,12 @@ const ViewData = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // Track 2FA status
   const [errormsg,setError] = useState('')
 
-    const verifyTwoFA = () => {
-    const correctAnswer = 'harmony2024'; // Replace with your correct answer
-    if (twoFAInput === correctAnswer) {
-      setIsAuthenticated(true);
-    } else {
-      setError('You got it right! But was it too easy? We were hoping for a brain-buster. Try again if you dare!')
-    }
-  };
 
   useEffect(() => {
+    const value = localStorage.getItem('authorized');
+    if(value){
+      setIsAuthenticated(true);
+    }
     const fetchUsers = async () => {
       try {
         const response = await axios.get('https://final-b-red.vercel.app/api/users');
@@ -36,6 +32,15 @@ const ViewData = () => {
     fetchUsers();
   }, []);
 
+    const verifyTwoFA = () => {
+    const correctAnswer = 'harmony2024'; // Replace with your correct answer
+    if (twoFAInput === correctAnswer) {
+      setIsAuthenticated(true);
+      localStorage.setItem('authorized', 'true');
+    } else {
+      setError('You got it right! But was it too easy? We were hoping for a brain-buster. Try again if you dare!')
+    }
+  };
 
   const handleCheckboxChange = async (userId, isChecked) => {
     try {
