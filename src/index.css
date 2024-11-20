@@ -1314,6 +1314,8 @@ input[type="file"]::-webkit-file-upload-button{
   justify-content: center;
   flex-direction: column;
   gap: 30px;
+  
+  padding: 20px; /* Ensure padding on smaller devices */
 }
 
 .two-fa-container {
