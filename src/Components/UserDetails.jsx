@@ -80,12 +80,12 @@ END:VCARD`;
       </div>
         <div className="user-details-cardsds">
           <div className="left-pane-cards">
-            <div className="image-name-flex">
+            <div className="image-name-flexes">
               {user.user_image && (
                 <img
                   src={`${user.user_image}`} // Fix the path here
                   alt={`${user.user_image}'s profile`}
-                  className="profile-image"
+                  className="profile-images"
                   onClick={() => openModal(user.user_image)} // Open modal when image is clicked
                 />
               )}
