@@ -954,6 +954,9 @@ input[type="file"]::file-selector-button:hover {
     flex-direction: row;
     flex-wrap: nowrap;
   }
+  .name-color-h3{
+    font-size:23px;
+  }
 }
 
 @media (max-width: 480px) {
