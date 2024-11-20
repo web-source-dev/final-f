@@ -251,27 +251,21 @@ const ViewData = () => {
                 </div>
                 <div className="flex-gap-bw-name">
                   {user.email && (
-  <div className="user-detail-itemds">
     <a href={`mailto:${user.email}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       <strong>Email :</strong>{user.email}
     </a>
-  </div>
 )}
 
 {user.work_email && (
-  <div className="user-detail-itemds">
     <a href={`mailto:${user.work_email}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       <strong>Work Email :</strong> {user.work_email}
     </a>
-  </div>
 )}
 
 {user.phone && (
-  <div className="user-detail-itemds">
     <a href={`tel:${user.phone}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       <strong>Phone :</strong> {user.phone}
     </a>
-  </div>
 )}
 
                       <p><strong>Address :</strong> {user.street}, {user.city}, {user.state}, {user.zip}</p>
