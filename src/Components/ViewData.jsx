@@ -9,30 +9,19 @@ const ViewData = () => {
   const [statusFilter, setStatusFilter] = useState('all');
   const [popupData, setPopupData] = useState(null); // State for popup content (image or QR code)
   const navigate = useNavigate();
-   const [questiondt, setQuestiondt] = useState({
-  question: 'Which city is known as the "Big Apple"?',
-  correct_answer: '',
-});
-const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
-const [error, setError] = useState('');
+  const [twoFAEnabled, setTwoFAEnabled] = useState(true); // 2FA enabled initially
+  const [twoFAInput, setTwoFAInput] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track 2FA status
+  const [errormsg,setError] = useState('')
 
-const handleChange = (e) => {
-  setQuestiondt({ ...questiondt, correct_answer: e.target.value });
-};
-
-const handleQuestionCheck = async () => {
-  try {
-    const checkres = await axios.post('https://final-b-red.vercel.app/api/checkfa', questiondt);
-    if (checkres.data.fasts === 0) {
-      setIsAnswerCorrect(true);
+    const verifyTwoFA = () => {
+    const correctAnswer = 'harmony2024'; // Replace with your correct answer
+    if (twoFAInput === correctAnswer) {
+      setIsAuthenticated(true);
     } else {
-      setError(checkres.data.msg);
+      setError('You got it right! But was it too easy? We were hoping for a brain-buster. Try again if you dare!')
     }
-  } catch (err) {
-    console.error(err);
-    setError('An error occurred. Please try again later.');
-  }
-};
+  };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -158,23 +147,24 @@ const handleQuestionCheck = async () => {
     return matchesSearch && matchesStatus;
   });
 
-  return (
-   
-  <div>
-    {!isAnswerCorrect ? (
-      // Show the question if the answer isn't correct
-      <div>
-        <label>{questiondt.question}</label>
+   if (!isAuthenticated && twoFAEnabled) {
+    return (
+      <div className="two-fa-container">
+        <h1>Two-Factor Authentication</h1>
+        <p>Please answer the security question to continue:</p>
+        <p><strong>Which city is known as the "Big Apple"?</strong></p>
         <input
           type="text"
+          value={twoFAInput}
+          onChange={(e) => setTwoFAInput(e.target.value)}
           placeholder="Enter your answer"
-          value={questiondt.correct_answer}
-          onChange={handleChange}
         />
-        <button onClick={handleQuestionCheck}>Submit</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <button onClick={verifyTwoFA}>Submit</button>
+        <p style={{color:'red'}}>{errormsg}</p>
       </div>
-    ) : (
+    );
+  }
+  return (
    <div className="view-data-container">
      
       {/* Filter Section */}
@@ -345,9 +335,6 @@ const handleQuestionCheck = async () => {
         </div>
       )}
     </div>
-    
-    )}
-  </div>
   );
 }; 
     
