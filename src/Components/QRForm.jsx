@@ -297,7 +297,7 @@ const QRForm = () => {
           </form>
         ) : (
           <div className="form-submitted">
-            <div id="qr-code-download" className="qr-code-container">
+            <div id="qr-code-download" className="qr-code-container-s">
               <h2>{namedata.first_name}</h2>
               <QRCodeCanvas
                 id="qr-code-canvas"
@@ -309,7 +309,7 @@ const QRForm = () => {
             </div>
             <div className="btn-of-download-qr">
             <button className="download-btn-of-qr" onClick={downloadQRCode}>Download QR Code</button>
-            <button className="back-red" onClick={() => setIsSubmitted(false)}>Back</button>
+            <button className="back-reds" onClick={() => setIsSubmitted(false)}>Back</button>
             </div>
           </div>
         )}
