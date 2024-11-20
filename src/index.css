@@ -755,7 +755,7 @@ input[type="file"]::file-selector-button:hover {
   font-size: 15px;
   color: #181818;
 }
-.email-inside-box .user-detail-itemds,.user-detail-itemd-adds{
+.email-inside-box .user-detail-itemds, .email-inside-box .user-detail-itemd-adds{
   display: flex;
   align-items: center;
   gap: 10px;
