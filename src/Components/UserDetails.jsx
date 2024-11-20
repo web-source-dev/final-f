@@ -121,11 +121,9 @@ END:VCARD`;
             <div className="email-outside-box-icon">
             <i class="ri-map-pin-fill"></i>
             <div className="email-inside-box">
-            {user.address && (
               <div className="user-detail-itemd-adds">
                     <p><strong>Address :</strong> {user.street}, {user.city}, {user.state}, {user.zip}</p>
               </div>
-            )}
             </div>
             </div>
             <div className="email-outside-box-icon">
