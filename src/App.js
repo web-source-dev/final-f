@@ -33,8 +33,8 @@ const AppContent = () => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<QRForm />} />
-        <Route path="/data" element={<ViewData />} />
+        <Route path="/" element={<ViewData />} />
+        <Route path="/qrform" element={<QRForm />} />
         <Route path="/user/:userId" element={<UserDetails />} />
         <Route path="/edit/:userId" element={<EditQRForm />} />
 
