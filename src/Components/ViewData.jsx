@@ -9,6 +9,9 @@ const ViewData = () => {
   const [statusFilter, setStatusFilter] = useState('all');
   const [popupData, setPopupData] = useState(null); // State for popup content (image or QR code)
   const navigate = useNavigate();
+  const [twoFAEnabled, setTwoFAEnabled] = useState(true); // 2FA enabled initially
+  const [twoFAInput, setTwoFAInput] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track 2FA status
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -22,6 +25,32 @@ const ViewData = () => {
     };
     fetchUsers();
   }, []);
+
+  const verifyTwoFA = () => {
+    const correctAnswer = 'harmony2024'; // Replace with your correct answer
+    if (twoFAInput === correctAnswer) {
+      setIsAuthenticated(true);
+    } else {
+      alert('Incorrect answer. Please try again.');
+    }
+  };
+
+  if (!isAuthenticated && twoFAEnabled) {
+    return (
+      <div className="two-fa-container">
+        <h1>Two-Factor Authentication</h1>
+        <p>Please answer the security question to continue:</p>
+        <p><strong>What is the name of this platform?</strong></p>
+        <input
+          type="text"
+          value={twoFAInput}
+          onChange={(e) => setTwoFAInput(e.target.value)}
+          placeholder="Enter your answer"
+        />
+        <button onClick={verifyTwoFA}>Submit</button>
+      </div>
+    );
+  }
 
   const handleCheckboxChange = async (userId, isChecked) => {
     try {
