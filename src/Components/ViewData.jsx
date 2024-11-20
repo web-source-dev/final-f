@@ -80,10 +80,7 @@ const ViewData = () => {
     context.fillText(userName, canvas.width / 2, 30);  // Adjusted position
 
     // Draw the QR code on the canvas with padding
-    context.drawImage(qrCanvas, padding, 50, qrCodeSize, qrCodeSize);
-
-    
-    context.fillText(`${namedata.first_name} ${namedata.last_name}`, canvas.width / 2, 30);    
+    context.drawImage(qrCanvas, padding, 50, qrCodeSize, qrCodeSize);  
     context.fillText(`https://www.harmony4all.org`, canvas.width / 2, qrCodeSize + 80);
 
     // Add user ID text (smaller font size for the ID)
