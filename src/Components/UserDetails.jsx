@@ -182,7 +182,7 @@ END:VCARD`;
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content">
             <img src={modalImage} alt="Profile" className="modal-image" />
-            <button className="close-modal" onClick={closeModal}>X</button>
+            <button className="close-modal" style={{opacity:0}} onClick={closeModal}>X</button>
           </div>
         </div>
       )}
