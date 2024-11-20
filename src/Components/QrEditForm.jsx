@@ -55,10 +55,10 @@ const EditQRForm = () => {
     fetchUserData();
   }, [userId]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setFormData((prev) => ({ ...prev, [name]: value }));
+};
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
@@ -100,55 +100,35 @@ const EditQRForm = () => {
   };
 
   const handleFormSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    setLoading(true);
+  setLoading(true);
 
-    // Prepare form data to be sent to the backend
-    const dataToSubmit = {
-      ...formData,  // Include the current form data
-      user_image: formData.user_image || null, // Ensure the image field is not null
-    };
-
-    try {
-      const response = await axios.put(
-        `http://localhost:5000/api/qrdata/${userId}`,
-        dataToSubmit
-      );
-
-      console.log(response);
-      setMessage('User updated successfully!');
-      setMessageType('success');
-
-      // Optionally reset form data after successful update
-      setFormData({
-        first_name: '',
-        last_name: '',
-        email: '',
-        work_email: '',
-        organization: '',
-        phone: '',
-        street: '',
-        city: '',
-        state: '',
-        zip: '',
-        youtube_url: '',
-        facebook_url: '',
-        linkden_url: '',
-        twitter_url: '',
-        user_image: null,
-      });
-
-      // Redirect to user list page after successful update
-      navigate('/');
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setMessage('Error: Could not update user data');
-      setMessageType('error');
-    } finally {
-      setLoading(false);
-    }
+  const dataToSubmit = {
+    ...formData,  // Include the current form data
+    user_image: formData.user_image || null, // Ensure the image field is not null
   };
+
+  console.log('Form Data to Submit:', dataToSubmit);  // Add this line to log data being sent
+
+  try {
+    const response = await axios.put(
+      `https://final-b-red.vercel.app/api/qrdata/${userId}`,
+      dataToSubmit
+    );
+
+    console.log(response);
+    setMessage('User updated successfully!');
+    setMessageType('success');
+    navigate('/');
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    setMessage('Error: Could not update user data');
+    setMessageType('error');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="center-form-c">
@@ -206,36 +186,37 @@ const EditQRForm = () => {
             />
                 <div className="zip-flex-conm" style={{display:'flex',gap:"10px"}}>
                 <input
-                  type="text"
-                  name="street"
-                  placeholder="Street"
-                  value={formData.street}
-              onChange={handleInputChange}
-                />
-                <input
-                  type="text"
-                  name="city"
-                  placeholder="City"
-                  value={formData.city}
-              onChange={handleInputChange}
-                  
-                />
+  type="text"
+  name="street"
+  placeholder="Street"
+  value={formData.street}
+  onChange={handleInputChange}
+/>
+<input
+  type="text"
+  name="city"
+  placeholder="City"
+  value={formData.city}
+  onChange={handleInputChange}
+/>
                 </div>
                 <div className="zip-flex-conme" style={{display:'flex',gap:"10px"}}>
-                <input
-                  type="text"
-                  name="state"
-                  placeholder="State"
-                  value={formData.state}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="text"
-                  name="zip"
-                  placeholder="ZIP"
-                  value={formData.zip}
-                  onChange={handleInputChange}
-                />
+              
+<input
+  type="text"
+  name="state"
+  placeholder="State"
+  value={formData.state}
+  onChange={handleInputChange}
+/>
+<input
+  type="text"
+  name="zip"
+  placeholder="ZIP"
+  value={formData.zip}
+  onChange={handleInputChange}
+/>
+
               
                 </div>
                 <input
