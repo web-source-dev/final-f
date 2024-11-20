@@ -149,7 +149,7 @@ const QRForm = () => {
     const pngUrl = canvas.toDataURL('image/png');
     const a = document.createElement('a');
     a.href = pngUrl;
-    a.download = `${userdata.first_name} ${userdata.last_name}qr.png`;
+    a.download = `${namedata.first_name} ${namedata.last_name}qr.png`;
     a.click();
   };
 
