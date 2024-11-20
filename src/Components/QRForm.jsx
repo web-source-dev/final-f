@@ -307,8 +307,10 @@ const QRForm = () => {
                 bgColor="#ffffff"
               />
             </div>
-            <button onClick={downloadQRCode}>Download QR Code</button> <br/>
+            <div className="btn-of-download-qr">
+            <button className="download-btn-of-qr" onClick={downloadQRCode}>Download QR Code</button>
             <button className="back-red" onClick={() => setIsSubmitted(false)}>Back</button>
+            </div>
           </div>
         )}
       </div>
