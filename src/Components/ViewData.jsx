@@ -155,7 +155,9 @@ const ViewData = () => {
       src="https://static.wixstatic.com/media/e65032_cd33c8b9dc8d4a4b986f7fa5ac06df3e~mv2.jpg/v1/crop/x_337,y_634,w_1319,h_753/fill/w_133,h_76,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Harmony%204%20All%20logo_G2%20(2).jpg"
       alt="Harmony 4All"
       className="logo-images"
-      style:{{width:"80px",height:"80px"}}
+       style={{
+    width: "80px",
+    height: "80px"}}
     />
   </div>
       <div className="two-fa-container">
