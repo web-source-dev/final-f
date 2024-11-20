@@ -144,8 +144,8 @@ const QRForm = () => {
 
 
     context.drawImage(qrCanvas, padding, 50, qrCodeSize, qrCodeSize);
-
-
+  
+        context.fillText(`https://www.harmony4all.org`, canvas.width / 2, qrCodeSize + 80);
     const pngUrl = canvas.toDataURL('image/png');
     const a = document.createElement('a');
     a.href = pngUrl;
