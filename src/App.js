@@ -25,7 +25,7 @@ const AppContent = () => {
     return (
       <div className="loading-screen">
         <div className="spinner"></div>
-        <h2><span style={{color:"#1fc45f"}}>Please Wait</span> Loading...</h2>
+        <h2>Loading...</h2>
       </div>
     );
   }
