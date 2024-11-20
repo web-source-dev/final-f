@@ -46,7 +46,7 @@ const ViewData = () => {
     }
 
     // Increase the size for better quality
-    const qrCodeSize = 150;  // Increase size for higher resolution
+    const qrCodeSize = 120;  // Increase size for higher resolution
     const padding = 50;
 
     // Set canvas size to accommodate larger resolution
