@@ -9,30 +9,30 @@ const ViewData = () => {
   const [statusFilter, setStatusFilter] = useState('all');
   const [popupData, setPopupData] = useState(null); // State for popup content (image or QR code)
   const navigate = useNavigate();
-    const [questiondt, setQuestiondt] = useState({
-    question: 'Which city is known as the "Big Apple"?', // Default question
-    correct_answer: '',
-  });
-  const [isAnswerCorrect, setIsAnswerCorrect] = useState(false); // Tracks if the answer is correct
+   const [questiondt, setQuestiondt] = useState({
+  question: 'Which city is known as the "Big Apple"?',
+  correct_answer: '',
+});
+const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
 const [error, setError] = useState('');
 
-  const handleChange = (e) => {
-    setQuestiondt({ ...questiondt, correct_answer: e.target.value });
-  };
+const handleChange = (e) => {
+  setQuestiondt({ ...questiondt, correct_answer: e.target.value });
+};
 
-  const handleQuestionCheck = async () => {
-    try {
-      const checkres = await axios.post(`https://final-b-red.vercel.app/api/checkfa`, questiondt);
-      if (checkres.data.fasts === 0) {
-        setIsAnswerCorrect(true); // Set to true if the answer is correct
-      } else {
-        setError(checkres.data.msg); // Set error message
-      }
-    } catch (err) {
-      console.error(err);
-      setError('An error occurred. Please try again later.');
+const handleQuestionCheck = async () => {
+  try {
+    const checkres = await axios.post('https://final-b-red.vercel.app/api/checkfa', questiondt);
+    if (checkres.data.fasts === 0) {
+      setIsAnswerCorrect(true);
+    } else {
+      setError(checkres.data.msg);
     }
-  };
+  } catch (err) {
+    console.error(err);
+    setError('An error occurred. Please try again later.');
+  }
+};
 
   useEffect(() => {
     const fetchUsers = async () => {
