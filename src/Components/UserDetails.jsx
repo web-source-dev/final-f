@@ -98,12 +98,12 @@ END:VCARD`;
             <div className="email-inside-box">
             {user.email && (
               <div className="user-detail-itemds">
-                <strong>Personal Email:</strong> {user.email}
+                <strong>Personal Email:</strong><br />{user.email}
               </div>
             )}
             {user.work_email && (
               <div className="user-detail-itemds">
-                <strong>Work Email:</strong> {user.work_email}
+                <strong>Work Email:</strong><br />{user.work_email}
               </div>
             )}
             </div>
