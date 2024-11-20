@@ -140,7 +140,8 @@ const QRForm = () => {
     context.fillStyle = '#000000';
     context.font = '20px Arial';
     context.textAlign = 'center';
-    context.fillText(namedata.first_name, canvas.width / 2, 30);
+    context.fillText(`${namedata.first_name} ${namedata.last_name}`, canvas.width / 2, 30);
+
 
     context.drawImage(qrCanvas, padding, 50, qrCodeSize, qrCodeSize);
 
@@ -148,7 +149,7 @@ const QRForm = () => {
     const pngUrl = canvas.toDataURL('image/png');
     const a = document.createElement('a');
     a.href = pngUrl;
-    a.download = 'user-qr-code.png';
+    a.download = `${userdata.first_name} ${userdata.last_name}qr.png`;
     a.click();
   };
 
@@ -306,7 +307,7 @@ const QRForm = () => {
                 bgColor="#ffffff"
               />
             </div>
-            <button onClick={downloadQRCode}>Download QR Code</button>
+            <button onClick={downloadQRCode}>Download QR Code</button> <br/>
             <button className="back-red" onClick={() => setIsSubmitted(false)}>Back</button>
           </div>
         )}
