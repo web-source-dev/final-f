@@ -161,7 +161,7 @@ END:VCARD`;
                 </a>
 
             <strong></strong>
-            {(user.youtube_url || user.facebook_url || user.linkden_url || user.twitter_url) ? (
+            {(user.youtube_url || user.facebook_url || user.linkden_url || user.instagram_url || user.twitter_url) ? (
               <>
                 {user.youtube_url && (
                   <a target='_blank' href={user.youtube_url}><i className="ri-youtube-fill"></i></a>
