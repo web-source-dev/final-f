@@ -336,6 +336,9 @@ const ViewData = () => {
                           {user.twitter_url && (
                             <a target='_blank' href={user.twitter_url}><i className="ri-twitter-fill"></i></a>
                           )}
+                           {user.instagram_url && (
+                            <a target='_blank' href={user.instagram_url}><i class="ri-instagram-fill"></i></a>
+                          )}
                         </>
                       ) : (
                         <h5>No social links available.</h5>
