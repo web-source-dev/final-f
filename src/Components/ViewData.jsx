@@ -322,7 +322,7 @@ const ViewData = () => {
 
                     </div>
                     <div className="links-flex-all-user">
-                      {(user.youtube_url || user.facebook_url || user.linkden_url || user.twitter_url) ? (
+                      {(user.youtube_url || user.instagram_url || user.facebook_url || user.linkden_url || user.twitter_url) ? (
                         <>
                           {user.youtube_url && (
                             <a target='_blank' href={user.youtube_url}><i className="ri-youtube-fill"></i></a>
