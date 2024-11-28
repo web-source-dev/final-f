@@ -21,6 +21,7 @@ const EditQRForm = () => {
     facebook_url: '',
     linkden_url: '',
     twitter_url: '',
+    instagram_url:'',
     user_image: null,
   });
 
@@ -263,6 +264,13 @@ const handleInputChange = (e) => {
                   name="twitter_url"
                   placeholder="Twitter URL"
                   value={formData.twitter_url}
+                  onChange={handleInputChange}
+                />
+                  <input
+                  type="url"
+                  name="instagram_url"
+                  placeholder="instagram URL"
+                  value={formData.instagram_url}
                   onChange={handleInputChange}
                 />
               </div>
