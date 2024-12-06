@@ -121,8 +121,12 @@ END:VCARD`;
   <div className="user-detail-itemds">
     <a href={`tel:${user.phone}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       {user.phone}
-    </a> <br />
-     <a href={`tel:${user.cell_phone}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+    </a>
+  </div>
+)}
+                      {user.cell_phone && (
+  <div className="user-detail-itemds">
+    <a href={`tel:${user.cell_phone}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       {user.cell_phone}
     </a>
   </div>
