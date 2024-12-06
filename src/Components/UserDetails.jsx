@@ -149,15 +149,16 @@ END:VCARD`;
             </div>
             </div>
                  <div className="email-outside-box-icon">
-            <i class="ri-organization-chart"></i>
+            <i class="ri-global-line"></i>
             <div className="email-inside-box">
-            {user.website_name || user.website_url && (
-              <div className="user-detail-itemd-adds">
-                 <a href={`${user.website_url}`} style={{color: 'inherit' }}>
-               {user.website_name}
+     {(user.website_name || user.website_url) && (
+  <div className="user-detail-itemd-adds">
+    <a href={`${user.website_url}`} style={{ color: 'inherit' }}>
+      {user.website_name || user.website_url}
     </a>
-              </div>
-            )}
+  </div>
+)}
+
             </div>
             </div>
           </div>
