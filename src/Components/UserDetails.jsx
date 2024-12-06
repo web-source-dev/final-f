@@ -37,7 +37,7 @@ const UserDetails = () => {
       const vCardData = `BEGIN:VCARD
 VERSION:3.0
 FN:${user.first_name}
-TEL:${user.phone || ''}
+TEL:${user.phone || user.cell_phone}
 EMAIL:${user.email || ''}
 ORG:${user.organization || ''}
 END:VCARD`;
@@ -122,6 +122,9 @@ END:VCARD`;
     <a href={`tel:${user.phone}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       {user.phone}
     </a>
+     <a href={`tel:${user.cell_phone}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      {user.cell_phone}
+    </a>
   </div>
 )}
 
@@ -141,6 +144,18 @@ END:VCARD`;
             {user.organization && (
               <div className="user-detail-itemd-adds">
                {user.organization}
+              </div>
+            )}
+            </div>
+            </div>
+                 <div className="email-outside-box-icon">
+            <i class="ri-organization-chart"></i>
+            <div className="email-inside-box">
+            {user.website_name || user.website_url && (
+              <div className="user-detail-itemd-adds">
+                 <a href={`${user.website_url}`} style={{color: 'inherit' }}>
+               {user.website_name}
+    </a>
               </div>
             )}
             </div>
