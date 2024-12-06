@@ -235,10 +235,10 @@ const ViewData = () => {
               <div className={`status-text ${user.isAllowed ? 'active' : 'inactive'}`}>
 {user.isAllowed ? 'Active' : 'Inactive'}
 <br />
-{user.scan_count ? `Scan Count: ${user.scan_count}` : 'Scan Count: 0'}
 
 
               </div>
+{user.scan_count ? `Scan Count: ${user.scan_count}` : 'Scan Count: 0'}
 
               <div className="flex-jfha">
                 <div className="image-name-flexd">
