@@ -13,6 +13,9 @@ const EditQRForm = () => {
     work_email: '',
     organization: '',
     phone: '',
+    cell_phone: '',
+    website_name: '',
+    website_url: '',
     street: '',
     city: '',
     state: '',
@@ -185,6 +188,13 @@ const handleInputChange = (e) => {
               onChange={handleInputChange}
               required
             />
+                       <input
+                  type="text"
+                  name="cell_phone"
+                  placeholder="Cell Phone"
+                  value={formData.cell_phone}
+                  onChange={handleInputChange}
+                />
                 <div className="zip-flex-conm" style={{display:'flex',gap:"10px"}}>
                 <input
   type="text"
@@ -237,6 +247,20 @@ const handleInputChange = (e) => {
                   value={formData.organization}
                   onChange={handleInputChange}
                   required
+                />
+                        <input
+                  type="text"
+                  name="website_name"
+                  placeholder="Website Name"
+                  value={formData.website_name}
+                  onChange={handleInputChange}
+                />
+                 <input
+                  type="url"
+                  name="website_url"
+                  placeholder="Website URL"
+                  value={formData.website_url}
+                  onChange={handleInputChange}
                 />
                 <input
                   type="url"
