@@ -233,9 +233,10 @@ const ViewData = () => {
           filteredUsers.map((user) => (
             <div key={user._id} className="user-card">
               <div className={`status-text ${user.isAllowed ? 'active' : 'inactive'}`}>
-           {user.isAllowed ? 'Active' : 'Inactive'}
+{user.isAllowed ? 'Active' : 'Inactive'}
 <br />
-{user.scan_count ? Scan Count : user.scan_count : '0'}
+{user.scan_count ? `Scan Count: ${user.scan_count}` : 'Scan Count: 0'}
+
 
               </div>
 
