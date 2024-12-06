@@ -274,8 +274,8 @@ const ViewData = () => {
     </a>
 )}
                   {(user.website_name || user.website_url) && (
-    <strong>Website :</strong> <a href={`${user.website_url}`} style={{ color: 'inherit' }}>
-       {user.website_name || user.website_url}
+   <a href={`${user.website_url}`} style={{ color: 'inherit' }}>
+       <strong>Website :</strong>   {user.website_name || user.website_url}
     </a>
 )}
 
