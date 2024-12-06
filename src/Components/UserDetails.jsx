@@ -12,7 +12,7 @@ const UserDetails = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`https://final-b-red.vercel.app/api/users/${userId}`);
+        const response = await axios.get(`https://final-b-red.vercel.app/api/users/scan/${userId}`);
         console.log(response.data);
         setUser(response.data); // Set the user data
         setErrorMessage(''); // Clear error message if the user is found
