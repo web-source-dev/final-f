@@ -32,25 +32,33 @@ const UserDetails = () => {
   }, [userId]);
 
   // Function to download the vCard
-  const downloadVCard = () => {
-    if (user) {
-      const vCardData = `BEGIN:VCARD
+ // Function to download the vCard with all user details
+const downloadVCard = () => {
+  if (user) {
+    const vCardData = `BEGIN:VCARD
 VERSION:3.0
-FN:${user.first_name}
-TEL:${user.phone || user.cell_phone}
-EMAIL:${user.email || ''}
+FN:${user.first_name} ${user.last_name || ''}
+N:${user.last_name || ''};${user.first_name || ''};;;
+TEL;TYPE=WORK,VOICE:${user.phone || ''}
+TEL;TYPE=CELL,VOICE:${user.cell_phone || ''}
+EMAIL;TYPE=INTERNET,WORK:${user.email || ''}
+EMAIL;TYPE=INTERNET,HOME:${user.work_email || ''}
 ORG:${user.organization || ''}
+TITLE:${user.job_title || ''}
+ADR;TYPE=WORK:;;${user.street || ''};${user.city || ''};${user.state || ''};${user.zip || ''};${user.country || ''}
+URL:${user.website_url || ''}
+NOTE:${user.notes || ''}
 END:VCARD`;
 
-      const blob = new Blob([vCardData], { type: 'text/vcard' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = `${user.first_name.replace(' ', '_')}_contact.vcf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
+    const blob = new Blob([vCardData], { type: 'text/vcard' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `${user.first_name.replace(' ', '_')}_contact.vcf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+};
 
   // Function to open the modal with the image
   const openModal = (image) => {
