@@ -121,7 +121,7 @@ END:VCARD`;
   <div className="user-detail-itemds">
     <a href={`tel:${user.phone}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       {user.phone}
-    </a>
+    </a> <br />
      <a href={`tel:${user.cell_phone}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       {user.cell_phone}
     </a>
