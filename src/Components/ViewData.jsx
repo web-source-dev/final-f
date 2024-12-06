@@ -267,6 +267,19 @@ const ViewData = () => {
       <strong>Phone :</strong> {user.phone}
     </a>
 )}
+                  {user.cell_phone && (
+    <a href={`tel:${user.cell_phone}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <strong>Cell Phone :</strong> {user.cell_phone}
+    </a>
+)}
+                  {(user.website_name || user.website_url) && (
+  <div className="user-detail-itemd-adds">
+    <a href={`${user.website_url}`} style={{ color: 'inherit' }}>
+      {user.website_name || user.website_url}
+    </a>
+  </div>
+)}
+
 
                       <p><strong>Address :</strong> {user.street}, {user.city}, {user.state}, {user.zip}</p>
                 </div>
