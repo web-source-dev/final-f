@@ -234,6 +234,7 @@ const ViewData = () => {
             <div key={user._id} className="user-card">
               <div className={`status-text ${user.isAllowed ? 'active' : 'inactive'}`}>
                 {user.isAllowed ? 'Active' : 'Inactive'}
+                {user.scan_count ? user.scan_count : '0'}
               </div>
 
               <div className="flex-jfha">
